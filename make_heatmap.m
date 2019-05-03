@@ -11,8 +11,7 @@ images = dir(filePattern);
 avg_NAI = cell(length(images), 2);
 
 %analyzes all files with extension .png in myFolder
-%images are read in numeric order based on name -> starts at lowest and
-%counts up
+%images are read in numeric order based on name -> starts at lowest and counts up
 for image_count = 1:1:length(images)
     baseFileName = images(image_count).name;
     fprintf('Now reading %s\n', baseFileName)
