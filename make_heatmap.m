@@ -8,7 +8,11 @@ if ~isdir(myFolder)
 end
 filePattern = fullfile(myFolder, '*.png');
 images = dir(filePattern);
-avg_NAI = cell(length(images), 2);
+
+%create array to store average predicted NAI for each image
+avg_NAI = cell(length(images) + 1, 2);
+avg_NAI{1, 1} = "Image Name";
+avg_NAI{1, 2} = "Average Predicted NAI";
 
 %analyzes all files with extension .png in myFolder
 %images are read in numeric order based on name -> starts at lowest and counts up
@@ -72,6 +76,6 @@ for image_count = 1:1:length(images)
     imwrite(heatmap, filename);
     
     %calculate average NAI by dividing total_NAI by number of leaf pixels
-    avg_NAI{image_count, 1} = cellstr(baseFileName);
-    avg_NAI{image_count, 2} = total_NAI/leaf_pixel_count;
+    avg_NAI{image_count + 1, 1} = cellstr(baseFileName);
+    avg_NAI{image_count + 1, 2} = total_NAI/leaf_pixel_count;
 end
