@@ -79,3 +79,5 @@ for image_count = 1:1:length(images)
     avg_NAI{image_count + 1, 1} = cellstr(baseFileName);
     avg_NAI{image_count + 1, 2} = total_NAI/leaf_pixel_count;
 end
+
+clearvars -except avg_NAI
