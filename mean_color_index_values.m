@@ -1,6 +1,6 @@
 clc; clear;
 
-myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019'; %replace with filepath to folder where images are saved
+myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\All Leaves\Test'; %replace with filepath to folder where leaf images are
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
@@ -11,6 +11,37 @@ images = dir(filePattern);
 
 all_means = zeros(length(images), 5, 3); %RGB/HSV/YIQ/Lab/YCbCr
 predictions = zeros(length(images), 1);
+
+%initialize arrays for output color data
+RGB_means = cell(length(images) + 1, 4);
+RGB_means{1, 1} = "Image Name";
+RGB_means{1, 2} = "R (red)";
+RGB_means{1, 3} = "G (green)";
+RGB_means{1, 4} = "B (blue)";
+
+HSV_means = cell(length(images) + 1, 4);
+HSV_means{1, 1} = "Image Name";
+HSV_means{1, 2} = "H (hue)";
+HSV_means{1, 3} = "S (saturation)";
+HSV_means{1, 4} = "V (value)";
+
+YIQ_means = cell(length(images) + 1, 4);
+YIQ_means{1, 1} = "Image Name";
+YIQ_means{1, 2} = "Y (luminance)";
+YIQ_means{1, 3} = "I (orange-blue)";
+YIQ_means{1, 4} = "Q (purple-green)";
+
+Lab_means = cell(length(images) + 1, 4);
+Lab_means{1, 1} = "Image Name";
+Lab_means{1, 2} = "L* (lightness)";
+Lab_means{1, 3} = "a* (green-red)";
+Lab_means{1, 4} = "b* (blue-yellow)";
+
+YCbCr_means = cell(length(images) + 1, 4);
+YCbCr_means{1, 1} = "Image Name";
+YCbCr_means{1, 2} = "Y (luma)";
+YCbCr_means{1, 3} = "Cb (blue-difference)";
+YCbCr_means{1, 4} = "Cr (red-difference)";
 
 %analyzes all files with extension .png in myFolder
 %images are read in numeric order based on name -> starts at lowest and
@@ -67,11 +98,22 @@ for image_count = 1:1:length(images)
             all_means(image_count, clr_space, clr_comp) = mean(all_pixels(:, clr_space, clr_comp));
         end
     end
+    
+    %label left column in each array with image name
+    RGB_means{image_count + 1, 1} = baseFileName;
+    HSV_means{image_count + 1, 1} = baseFileName;
+    YIQ_means{image_count + 1, 1} = baseFileName;
+    Lab_means{image_count + 1, 1} = baseFileName;
+    YCbCr_means{image_count + 1, 1} = baseFileName;
+    
+    for clr_comp = 1:1:3
+        RGB_means{image_count + 1, clr_comp + 1} = all_means(image_count, 1, clr_comp);
+        HSV_means{image_count + 1, clr_comp + 1} = all_means(image_count, 2, clr_comp);
+        YIQ_means{image_count + 1, clr_comp + 1} = all_means(image_count, 3, clr_comp);
+        Lab_means{image_count + 1, clr_comp + 1} = all_means(image_count, 4, clr_comp);
+        YCbCr_means{image_count + 1, clr_comp + 1} = all_means(image_count, 5, clr_comp);
+    end
 end
 
-%separate data in all color spaces into different variables
-RGB_means = reshape(all_means(:, 1, :), [length(images), 3]);
-HSV_means = reshape(all_means(:, 2, :), [length(images), 3]);
-YIQ_means = reshape(all_means(:, 3, :), [length(images), 3]);
-Lab_means = reshape(all_means(:, 4, :), [length(images), 3]);
-YCbCr_means = reshape(all_means(:, 5, :), [length(images), 3]);
+%clear workspace of variables, except for arrays containing output data
+clearvars -except RGB_means HSV_means YIQ_means Lab_means YCbCr_means
