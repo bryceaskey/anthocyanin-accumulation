@@ -1,3 +1,6 @@
+%calculates mean color index values in 5 color spaces for each image in a specified folder
+%color spaces are: RGB, HSV, YIQ, L*a*b*, and YCbCr
+%stores mean color index values for each color space in a separate array
 clc; clear;
 
 myFolder = '\\example\filepath'; %replace with filepath to folder where leaf images are
@@ -9,7 +12,7 @@ end
 filePattern = fullfile(myFolder, '*.png');
 images = dir(filePattern);
 
-all_means = zeros(length(images), 5, 3); %RGB/HSV/YIQ/Lab/YCbCr
+all_means = zeros(length(images), 5, 3); %RGB/HSV/YIQ/L*a*b*/YCbCr
 predictions = zeros(length(images), 1);
 
 %initialize arrays for output color data
@@ -77,7 +80,7 @@ for image_count = 1:1:length(images)
     RGB_image = double(RGB_image);
 
     %separate leaf pixel data in all color spaces
-    all_pixels = zeros(leaf_pixel_count, 5, 3); %RGB/HSV/YIQ/Lab/YCbCr
+    all_pixels = zeros(leaf_pixel_count, 5, 3); %RGB/HSV/YIQ/L*a*b*/YCbCr
     pixel_count = 1;
     for row = 1:1:height
         for column = 1:1:width
