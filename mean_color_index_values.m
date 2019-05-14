@@ -1,6 +1,6 @@
 clc; clear;
 
-myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\All Leaves\Test'; %replace with filepath to folder where leaf images are
+myFolder = '\\example\filepath'; %replace with filepath to folder where leaf images are
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
