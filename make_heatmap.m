@@ -1,6 +1,9 @@
+%creates a false color heatmap NAI values predicted by a regression at each pixel in an image, for each image in a folder
 %trained regression must be loaded into workspace first
+%heatmap images are saved as .png files to folder containing original images
+%to distinguish heatmap images, "Heatmap_" is added to beginning of the original file name
 
-myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\Heatmap Leaves'; %replace with filepath to folder where images are saved
+myFolder = '\\example\filepath'; %replace with filepath to folder where images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
