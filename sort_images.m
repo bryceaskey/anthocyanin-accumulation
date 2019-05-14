@@ -1,6 +1,5 @@
 %randomly sorts images in a folder into 2 groups, Test and Trainval
-%Test and Trainval folders are created as subfolders withing the folder
-%which originall contained the images
+%Test and Trainval folders are created as subfolders within the original folder
 %by default, 20% of images are sorted into Test, and 80% into Trainval
 clc; clear;
 
