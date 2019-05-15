@@ -3,7 +3,7 @@
 %by default, 20% of images are sorted into Test, and 80% into Trainval
 clc; clear;
 
-myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\Backup'; %replace with filepath to folder where images are saved
+myFolder = '\\example\filepath'; %replace with filepath to folder where images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
