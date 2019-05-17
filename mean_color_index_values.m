@@ -3,7 +3,7 @@
 %stores mean color index values for each color space in a separate array
 clc; clear;
 
-myFolder = '\\example\filepath'; %replace with filepath to folder where leaf images are
+myFolder = '\\example\filepath'; %replace with filepath to folder where leaf images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
