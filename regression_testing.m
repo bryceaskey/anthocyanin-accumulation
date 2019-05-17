@@ -2,7 +2,7 @@
 %all exported regressions must be named to match code below
 %the "test" variable is a table containing mean color index values for test images in a single color space
 %the "predicted" variable stores output NAI predictions for all regressions
-[height, width] = size(test);
+[height, width] = size(Test);
 predicted = cell(height + 1, 19);
 
 regression_names = ["Linear", "Interactions Linear", "Robust Linear", "Stepwise Linear", "Fine Tree", "Medium Tree", "Coarse Tree", "Linear SVM", "Quadratic SVM", "Cubic SVM", "Fine Gaussian SVM", "Medium Gaussian SVM", "Coarse Gaussian SVM", "Boosted Trees", "Bagged Trees", "Squared Exponential GPR", "Matern 5/2 GPR", "Exponential GPR", "Rational Quadratic GPR"];
