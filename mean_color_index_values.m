@@ -16,11 +16,11 @@ all_means = zeros(length(images), 5, 3); %RGB/HSV/YIQ/L*a*b*/YCbCr
 predictions = zeros(length(images), 1);
 
 %initialize arrays for output color data
-RGB_means = cell(length(images) + 1, 4);
-RGB_means{1, 1} = "Image Name";
-RGB_means{1, 2} = "R (red)";
-RGB_means{1, 3} = "G (green)";
-RGB_means{1, 4} = "B (blue)";
+sRGB_means = cell(length(images) + 1, 4);
+sRGB_means{1, 1} = "Image Name";
+sRGB_means{1, 2} = "R (red)";
+sRGB_means{1, 3} = "G (green)";
+sRGB_means{1, 4} = "B (blue)";
 
 HSV_means = cell(length(images) + 1, 4);
 HSV_means{1, 1} = "Image Name";
@@ -103,14 +103,14 @@ for image_count = 1:1:length(images)
     end
     
     %label left column in each array with image name
-    RGB_means{image_count + 1, 1} = baseFileName;
+    sRGB_means{image_count + 1, 1} = baseFileName;
     HSV_means{image_count + 1, 1} = baseFileName;
     YIQ_means{image_count + 1, 1} = baseFileName;
     Lab_means{image_count + 1, 1} = baseFileName;
     YCbCr_means{image_count + 1, 1} = baseFileName;
     
     for clr_comp = 1:1:3
-        RGB_means{image_count + 1, clr_comp + 1} = all_means(image_count, 1, clr_comp);
+        sRGB_means{image_count + 1, clr_comp + 1} = all_means(image_count, 1, clr_comp);
         HSV_means{image_count + 1, clr_comp + 1} = all_means(image_count, 2, clr_comp);
         YIQ_means{image_count + 1, clr_comp + 1} = all_means(image_count, 3, clr_comp);
         Lab_means{image_count + 1, clr_comp + 1} = all_means(image_count, 4, clr_comp);
@@ -119,4 +119,4 @@ for image_count = 1:1:length(images)
 end
 
 %clear workspace of variables, except for arrays containing output data
-clearvars -except RGB_means HSV_means YIQ_means Lab_means YCbCr_means
+clearvars -except sRGB_means HSV_means YIQ_means Lab_means YCbCr_means
