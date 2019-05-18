@@ -3,7 +3,7 @@
 %heatmap images are saved as .png files to folder containing original images
 %to distinguish heatmap images, "Heatmap_" is added to beginning of the original file name
 
-myFolder = '\\example\filepath'; %replace with filepath to folder where images are saved
+myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\Heatmap Leaves'; %replace with filepath to folder where images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
@@ -53,7 +53,7 @@ for image_count = 1:1:length(images)
         for column = 1:1:width
             if leaf_pixels(row, column) == 1
                 pixel = reshape(YIQ_image(row, column, :), [1, 3]);
-                NAI = RationalQuadraticGPR.predictFcn(pixel);
+                NAI = RationalQuadraticGPR.predictFcn(pixel); %replace with name of desired regression
                 total_NAI = total_NAI + NAI;
                 if NAI < 20
                     heatmap(row, column, :) = [231, 213, 217]; %pale white
