@@ -3,7 +3,7 @@
 %heatmap images are saved as .png files to folder containing original images
 %to distinguish heatmap images, "Heatmap_" is added to beginning of the original file name
 
-myFolder = '\\client\c$\Users\bca08_000\Desktop\Testing\Test'; %replace with filepath to folder where images are saved
+myFolder = '\\example\filepath'; %replace with filepath to folder where images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
