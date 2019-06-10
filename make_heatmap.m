@@ -3,7 +3,7 @@
 %heatmap images are saved as .png files to folder containing original images
 %to distinguish heatmap images, "Heatmap_" is added to beginning of the original file name
 
-myFolder = '\\client\c$\Users\Bryce\Desktop\ArabidopsisPhotos1.20.2019\Heatmap Leaves'; %replace with filepath to folder where images are saved
+myFolder = '\\client\c$\Users\bca08_000\Desktop\Testing\Test'; %replace with filepath to folder where images are saved
 if ~isdir(myFolder)
   errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);
   uiwait(warndlg(errorMessage));
@@ -11,6 +11,9 @@ if ~isdir(myFolder)
 end
 filePattern = fullfile(myFolder, '*.png');
 images = dir(filePattern);
+
+color_space = 'Name of color space'; %replace with name of color space which regression was trained with data from
+%e.g. sRGB, HSV, YIQ, L*a*b*, or YCbCr
 
 %create array to store average predicted NAI for each image
 avg_NAI = cell(length(images) + 1, 2);
@@ -45,15 +48,29 @@ for image_count = 1:1:length(images)
     heatmap = zeros(height, width, pages);
     total_NAI = 0;
     RGB_image = uint8(RGB_image); %image must be in uint8 to change color space
-    YIQ_image = rgb2ntsc(RGB_image);
+    
+    if strcmp(color_space, 'sRGB') == 1
+        target_image = RGB_image;
+    elseif strcmp(color_space, 'HSV') == 1
+        target_image = rgb2hsv(RGB_image);
+    elseif strcmp(color_space, 'YIQ') == 1 
+        target_image = rgb2ntsc(RGB_image);
+    elseif strcmp(color_space, 'L*a*b*') == 1
+        target_image = rgb2lab(RGB_image);
+    elseif strcmp(color_space, 'YCbCr') == 1
+        target_image = double(rgb2ycbcr(RGB_image));
+    else
+        disp('Color space not recognized');
+        return;
+    end
     
     %apply regression to each leaf pixel to predict NAI at each pixel
     %assign pixel color in heatmap image based on predicted NAI
     for row = 1:1:height
         for column = 1:1:width
             if leaf_pixels(row, column) == 1
-                pixel = reshape(YIQ_image(row, column, :), [1, 3]);
-                NAI = RationalQuadraticGPR.predictFcn(pixel); %replace with name of desired regression
+                pixel = reshape(target_image(row, column, :), [1, 3]);
+                NAI = ExampleRegressionName.predictFcn(pixel); %replace with name of desired regression
                 total_NAI = total_NAI + NAI;
                 if NAI < 20
                     heatmap(row, column, :) = [231, 213, 217]; %pale white
