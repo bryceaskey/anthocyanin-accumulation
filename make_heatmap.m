@@ -50,7 +50,7 @@ for image_count = 1:1:length(images)
     RGB_image = uint8(RGB_image); %image must be in uint8 to change color space
     
     if strcmp(color_space, 'sRGB') == 1
-        target_image = RGB_image;
+        target_image = double(RGB_image);
     elseif strcmp(color_space, 'HSV') == 1
         target_image = rgb2hsv(RGB_image);
     elseif strcmp(color_space, 'YIQ') == 1 
