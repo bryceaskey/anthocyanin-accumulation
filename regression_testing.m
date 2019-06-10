@@ -1,7 +1,7 @@
 %use after exporting all trained regressions in a color space to the workspace
 %all exported regressions must be named to match code below
-%the "Test" variable is a table containing mean color index values for Test images in a single color space
-%the "Predictions" variable stores output NAI predictions for all regressions
+%the "Test" variable must be manually created, and is a table containing mean color index values for Test images in a single color space
+%the "Predictions" variable is created by the code, and stores output NAI predictions for all regressions
 [height, width] = size(Test);
 Predictions = cell(height + 1, 19);
 
