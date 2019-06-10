@@ -1,5 +1,3 @@
-MATLAB code used to sort and analyze leaf images, evaluate regressions for accuracy, and generate anthocyanin false color heatmaps.
-
 BEFORE RUNNING CODE:
 - remove background pixels from all images
 - save each leaf as a separate '.png' file in a single folder
@@ -15,3 +13,6 @@ Uses regressions trained in a single color space to make predictions of NAI valu
 
 # make_heatmap.m
 Uses a single trained regression to make NAI predictions at each pixel in an image, for all images in a folder. Generates a false color heatmap of anthocyanin accumulation based on NAI values at each pixel. Heatmap images are saved to the same folder which contains the original images. The average predicted NAI of all pixels in each image is stored in the cell array "avg_NAI". Before running code, replace "\\\example\filepath" with filepath to folder containing images to be analyzed.
+
+# Appendix S1
+An Excel spreadsheet containing mean color index values for leaf images in all color spaces used, actual and predicted Normalized Anthocyanin Index (NAI) values for all leaves, and calculated metrics used to evaluate regression accuracy.
