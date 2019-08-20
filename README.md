@@ -1,4 +1,4 @@
-BEFORE RUNNING CODE:
+## BEFORE RUNNING CODE:
 - remove background pixels from all images
 - save each leaf as a separate '.png' file in a single folder
 
