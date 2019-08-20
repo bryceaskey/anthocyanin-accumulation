@@ -37,7 +37,7 @@ Function to train 22 regression models from the "caret" package with training da
 - transformParameters - output of preprocessData.R. Parameters necessary for centering and scaling of mean color index values.
 - i - a number 1-5 which corresponds to each of the 5 color spaces (1 - sRGB, 2 - HSV, 3 - YIQ, 4 - YCbCr, 5 - Lab)
 
-To automate model training for all 5 color spaces at once, and to combine all models into a single variable, a for loop can be used as shown in lines
+To automate model training for all 5 color spaces at once, and to combine all models into a single variable, a for loop can be used as shown in lines 69-74 of main.R.
 
 ### testModels.R -
 Function to evaluate accuracy of all trained models using test data. Creates a data frame with the RMSE, r^2, and MAE for each model, sorted from lowest to highest RMSE. The function can be called from the console with the following syntax: modelAccuracies <- testModels(allModels)
@@ -50,6 +50,10 @@ Function to create false-color heatmaps based on NAI predicted by a trained mode
 - transformParameters - output of preprocessData.R. Parameters necessary for centering and scaling of mean color index values.
 - modelAccuracies - output of testModels.R. List of accuracy parameters for all models.
 - allModels - output of trainModels.R. Contains all trained models. By default, the most accurate model is selected for use in heatmap generation.
+
+## Secondary functions:
+### convertColorSpace.R - 
+Function to convert sRGB pixel data into different color spaces. Available color spaces: HSV, YIQ, YCbCr, and Lab. The function is called by meanColorIndexValues.R and makeHeatmap.R.
 
 ## Data:
 ### Appendix S1 - 
