@@ -22,16 +22,23 @@ Function to calculate mean color index values in 5 color spaces for a set of ima
 
 ### preprocessData.R - 
 Function to calculate parameters necessary for centering and scaling of mean color index values. The function can be called from the console with the following syntax: transformParameters <- preprocessData(imageData)
-- imageData - output list of dataframes from meanColorIndexValues.R. Contains mean color index values for each image in the imagePath directory in 5 color spaces.
+- imageData - output of meanColorIndexValues.R. A list of data frame which contain mean color index values for each image in the imagePath directory in 5 color spaces.
 
 ### prepareData.R - 
-
-
-
+Function to automate the merging of sample NAI data with mean color index values. The function can be called from the console with the following syntax: allData <- prepareData(imageData)
+- imageData - output of meanColorIndexValues.R. A list of data frame which contain mean color index values for each image in the imagePath directory in 5 color spaces.
 
 ### trainModels.R -
+Function to train 22 regression models from the "caret" package with mean color index values in 5 color spaces. Input data must first be merged, centered, and scaled with the functions preprocessData.R and prepareData.R. To loop through data from each color space, the function can be called from the console with the following syntax:
+allModels <- vector("list", 5)
+for(i in 1:length(allData)){
+  allModels[[i]] <- trainModels(allData[[i]], transformParams[[i]])
+}
+names(allModels) <- c("sRGB", "HSV", "YIQ", "YCbCr", "Lab")
 
 ### testModels.R -
+
+### makeHeatmap.R - 
 
 ## Data:
 ## Appendix S1
