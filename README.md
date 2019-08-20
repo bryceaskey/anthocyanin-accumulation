@@ -11,7 +11,7 @@ Once code has started running, the user is prompted to input:
 - imagePath - directory where all images which will be used to regression training and testing are saved
 - absorbancePath - full file path to .csv file containing sample names and corresponding NAI
   - sampleNumColumn - column number in .csv file which contains sample names
-  - sampleNAIColumn - column number in .csv file which contains NAI data
+  - NAIColumn - column number in .csv file which contains NAI data
 - heatmapPath - directory where all images which heatmaps will be generated from are saved
 
 Alternatively, individual functions can be called manually by the user. To use this apporach, the main working directory which contains all code files must first be set with the command setwd(). All functions and packages must be loaded into the R environment manually using the source(), install.packages(), and library() commands. See lines 27 - 58 of main.R to view all necessary functions and packages.
@@ -27,6 +27,9 @@ Function to calculate parameters necessary for centering and scaling of mean col
 ### prepareData.R - 
 Function to automate the merging of sample NAI data with mean color index values. The function can be called from the console with the following syntax: allData <- prepareData(imageData)
 - imageData - output of meanColorIndexValues.R. A list of data frames which contain mean color index values for each image in the imagePath directory in 5 color spaces.
+- csvFilepath - full path to .csv file containing sample names and corresponding NAI
+- sampleNumColumn - column number in .csv file which contains sample names
+- NAIColumn - column number in .csv file which contains NAI data
 
 ### trainModels.R -
 Function to train 22 regression models from the "caret" package with training data. Input data must first be merged, centered, and scaled with the functions preprocessData.R and prepareData.R. The function can be called from the console with the following syntax: colorSpaceModels <- trainModels(allData[[i]], transformParameters[[i]]).
