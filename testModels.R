@@ -5,7 +5,7 @@
 testModels <- function(allModels){
   
   # initialize vectors to model accuracy data
-  numModels <- length(allModels[[i]]) - 2
+  numModels <- length(allModels[[1]]) - 2
   modelName <- rep(NA, numModels)
   modelColorSpace <- rep(NA, numModels)
   modelRMSE <- rep(NA, numModels)
